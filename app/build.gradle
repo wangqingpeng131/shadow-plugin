@@ -1,0 +1,113 @@
+plugins {
+    id 'com.android.application'
+    id 'com.tencent.shadow.plugin'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.test.shadowmaster"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    flavorDimensions(*flavorDimensionList)
+    signingConfigs {
+        debug {
+            storeFile file("../app/a78.jks")
+            storePassword "zxc123"
+            keyAlias "a78"
+            keyPassword "zxc123"
+        }
+
+        release {
+            storeFile file("../app/a78.jks")
+            storePassword "zxc123"
+            keyAlias "a78"
+            keyPassword "zxc123"
+        }
+
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+            debuggable true
+            zipAlignEnabled true
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // 将插件applicationId设置为和宿主相同
+    productFlavors {
+        plugin {
+            applicationId "com.test.shadowmaster"
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    pluginCompileOnly "com.tencent.shadow.core:runtime:$shadow_version"
+
+}
+shadow {
+    transform {
+//        useHostContext = ['abc']
+    }
+
+    packagePlugin {
+        pluginTypes {
+            debug {
+                loaderApkConfig = new Tuple2('loade-debug.apk', ':loade:assembleDebug')
+                runtimeApkConfig = new Tuple2('runtime-debug.apk', ':runtime:assembleDebug')
+                pluginApks {
+                    pluginApk1 {
+                        businessName = 'app'//businessName相同的插件，context获取的Dir是相同的。businessName留空，表示和宿主相同业务，直接使用宿主的Dir。
+                        partKey = 'pp'
+                        buildTask = 'assembleDebug'
+                        apkPath = 'app/build/outputs/apk/plugin/debug/app-plugin-debug.apk'
+                    }
+                }
+            }
+
+            release {
+                loaderApkConfig = new Tuple2('loade-release.apk', ':loade:assembleRelease')
+                runtimeApkConfig = new Tuple2('runtime-release.apk', ':runtime:assembleRelease')
+                pluginApks {
+                    pluginApk1 {
+                        businessName = 'app'
+                        partKey = 'pp'
+                        buildTask = 'assembleRelease'
+                        apkPath = 'app/build/outputs/apk/plugin/release/app-plugin-release.apk'
+                    }
+                }
+            }
+        }
+        loaderApkProjectPath = 'loade'
+        runtimeApkProjectPath = 'runtime'
+        version = 4
+        compactVersion = [1, 2, 3]
+        uuidNickName = "1.1.5"
+    }
+}

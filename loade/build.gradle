@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 31
+    defaultConfig {
+        applicationId "com.test.shadowmaster"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0.0"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.create("release")
+            signingConfig.initWith(buildTypes.debug.signingConfig)
+        }
+    }
+}
+
+dependencies {
+    implementation "com.tencent.shadow.core:loader:$shadow_version"
+    implementation "com.tencent.shadow.dynamic:loader-impl:$shadow_version"
+    compileOnly "com.tencent.shadow.dynamic:host:$shadow_version"
+    compileOnly "com.tencent.shadow.core:runtime:$shadow_version"
+    compileOnly "com.tencent.shadow.core:activity-container:$shadow_version"
+    compileOnly "com.tencent.shadow.core:common:$shadow_version"
+}
+

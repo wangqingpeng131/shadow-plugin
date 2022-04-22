@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="pay_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmb7C6R2gqP5Rx5tsHgMzC3YpCE3o5+lTyIvAgWao3qNpDVuJaIxnC/QnvywlNOCweMheZKyxzcsz35cicToKKH8Sf00Kq/zrwrnXxS9hbtW62HTtZIIDQaLSOTZOHY6D182FvrbUhKUh2DcjULlor06A4gTqgJkNn9HlXPRkihE2f1GY3fD/Na75/r1uyn1jV0CHyknf+FyGpBf8ivvyntx+iozlLWpbvwhJAluJrAq5RCzYIKQ6/KI0cEGqKpFf+Notaq7er3cRKPhrgacr1U9XCPHpwpDRUbQHgRW6en1HB+FRi1SMnA+9D/wUdb+FWbADs1Sl5LZERIFlJgQuhQIDAQAB</string>
+    <string name="emil_url">germainevillagran@gmail.com </string>
+    <string name="privacy">https://abnormal-art.surge.sh/Privacy_Agreement.html</string>
+
+    <string name="login_hint_text">Enter your Tik Tok username</string>
+    <!-- Strings related to login -->
+    <string name="login_failed">Login failed, please try again</string>
+
+    <string name="no_media">Please choose a post</string>
+    <string name="privacy_user">Your account is a private, please change it to a public.</string>
+    <string name="privacy_media">This post is a private post, please set it to public.</string>
+    <string name="user_name_not_empty">User name cannot be empty.</string>
+    <string name="email_title">Please choose you client to send!</string>
+    <string name="app_name">TtKernel</string>
+    <string name="user_hint">TikTok UserName</string>
+    <string name="not_nick">NOT NICKNAME!</string>
+    <string name="pay_err">Don\'t find purchase item, please connect the technician.</string>
+    <string name="not_found_user">The account could not be found</string>
+</resources>
